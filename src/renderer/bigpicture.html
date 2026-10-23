@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <!-- style-src allows inline styles because Electron's <webview> sizes its internal frame with them. -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' kairo-art: data:">
+  <title>Kairoware XP Big Picture</title>
+  <link rel="stylesheet" href="kairoui.css">
+  <link rel="stylesheet" href="bigpicture.css">
+</head>
+<body class="bp booting">
+  <div class="kui-aurora"><span></span></div>
+  <div class="backdrop">
+    <div class="bg-layer" id="bg-a"></div>
+    <div class="bg-layer" id="bg-b"></div>
+    <div class="bg-shade"></div>
+  </div>
+
+  <header class="topbar">
+    <div class="bp-brand"><img class="logo" src="logo.svg" alt=""><span>KAIROWARE <b>XP</b></span></div>
+    <nav class="tabs kui-glass" id="tabs"></nav>
+    <div class="quick-actions">
+      <button class="quick kui-glass" id="quick-browser" title="Navegador">🌐</button>
+      <button class="quick kui-glass" id="quick-store" title="Loja de apps">🛍️</button>
+    </div>
+    <div class="status kui-glass">
+      <span class="controller-chip" id="controller-chip" hidden>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M7 6h10a5 5 0 015 5v3a4 4 0 01-7.2 2.4L13.5 15h-3l-1.3 1.4A4 4 0 012 14v-3a5 5 0 015-5zm1 3v2H6v2h2v2h2v-2h2v-2h-2V9zm8 0a1.2 1.2 0 100 2.4A1.2 1.2 0 0016 9zm-2 2.6a1.2 1.2 0 100 2.4 1.2 1.2 0 000-2.4z"/></svg>
+        <span id="controller-name"></span>
+      </span>
+      <span class="pill" id="gamemode-pill">Modo Jogo</span>
+      <span id="stat-cpu">CPU —</span>
+      <span id="stat-ram">RAM —</span>
+      <span id="clock">--:--</span>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-source"><span id="hero-source"></span><span class="hero-fav" id="hero-fav" hidden>★ Favorito</span></div>
+    <h1 id="hero-title">Carregando biblioteca…</h1>
+    <p id="hero-sub"></p>
+    <button class="play-button" id="hero-play">▶&nbsp; Jogar</button>
+  </section>
+
+  <section class="shelf" id="shelf">
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <footer class="hints kui-glass" id="hints"></footer>
+
+  <!-- Web browser -->
+  <div class="browser" id="browser">
+    <div class="browser-bar kui-glass">
+      <button class="nav-btn" id="browser-back" title="Voltar">‹</button>
+      <button class="nav-btn" id="browser-forward" title="Avançar">›</button>
+      <button class="nav-btn" id="browser-reload" title="Recarregar">⟳</button>
+      <button class="address" id="browser-address"><span class="lock">⌕</span><span id="browser-url"></span></button>
+      <button class="nav-btn" id="browser-home-btn" title="Início">⌂</button>
+      <button class="nav-btn" id="browser-close" title="Fechar navegador">✕</button>
+    </div>
+    <div class="browser-body" id="browser-body">
+      <div class="loading-bar"></div>
+      <div class="browser-home" id="browser-home">
+        <h2><img src="logo.svg" alt="">Navegador Kairoware XP</h2>
+        <p>Use o controle para navegar: analógico esquerdo move o cursor, o direito rola a página.</p>
+        <div class="site-grid" id="site-grid"></div>
+      </div>
+      <div class="browser-cursor" id="browser-cursor"></div>
+    </div>
+  </div>
+
+  <!-- App store -->
+  <div class="store" id="store">
+    <header class="store-head">
+      <img src="logo.svg" alt="">
+      <div>
+        <h2>Loja de apps</h2>
+        <p>Apps para usar na TV e com controle. Instalados, eles aparecem na aba Apps.</p>
+      </div>
+    </header>
+    <div class="store-grid" id="store-grid"></div>
+  </div>
+
+  <div class="overlay" id="menu-overlay">
+    <div class="panel kui-glass">
+      <h2 id="menu-title"></h2>
+      <div class="menu-list" id="menu-list"></div>
+    </div>
+  </div>
+
+  <div class="overlay" id="launch-overlay">
+    <div class="launch-card">
+      <div class="launch-art" id="launch-art"></div>
+      <div class="spinner"></div>
+      <p>Iniciando</p>
+      <h2 id="launch-title"></h2>
+    </div>
+  </div>
+
+  <!-- Virtual keyboard -->
+  <div class="vkeyboard" id="vkeyboard">
+    <div class="vk-panel kui-glass">
+      <div class="vk-title"></div>
+      <div class="vk-field"><span class="vk-value"></span><span class="vk-caret"></span></div>
+      <div class="vk-rows"></div>
+    </div>
+  </div>
+
+  <!-- Boot animation, removed once the library is ready -->
+  <div class="boot" id="boot">
+    <div class="boot-rings"><span></span><span></span><span></span></div>
+    <img class="boot-logo" src="logo.svg" alt="">
+    <div class="boot-title">KAIROWARE <b>XP</b></div>
+    <div class="boot-bar"><span></span></div>
+  </div>
+
+  <div id="bp-toasts"></div>
+  <script src="bp-controller.js"></script>
+  <script src="bp-keyboard.js"></script>
+  <script src="bp-browser.js"></script>
+  <script src="bp-apps.js"></script>
+  <script src="bigpicture.js"></script>
+</body>
+</html>

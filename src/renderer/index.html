@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:">
+  <title>Kairoware XP</title>
+  <link rel="stylesheet" href="kairoui.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="kui-aurora"><span></span></div>
+  <aside class="sidebar">
+    <div class="brand">
+      <img class="logo" src="logo.svg" alt="">
+      <div class="brand-text">
+        <strong>Kairoware</strong>
+        <span>XP</span>
+      </div>
+    </div>
+
+    <nav>
+      <button class="nav-item" data-page="dashboard">
+        <svg viewBox="0 0 24 24"><path d="M3 13h8V3H3zm10 8h8V11h-8zM3 21h8v-6H3zm10-18v6h8V3z"/></svg>
+        Painel
+      </button>
+      <button class="nav-item" data-page="cleaner">
+        <svg viewBox="0 0 24 24"><path d="M9 3h6l1 2h4v2H4V5h4zm-3 6h12l-1 12H7z"/></svg>
+        Limpeza
+      </button>
+      <button class="nav-item" data-page="startup">
+        <svg viewBox="0 0 24 24"><path d="M12 2c3 2 5 6 5 10l-2 3H9l-2-3c0-4 2-8 5-10zm0 6a2 2 0 100 4 2 2 0 000-4zM9 17h6l-1 5h-4z"/></svg>
+        Inicialização
+      </button>
+      <button class="nav-item" data-page="processes">
+        <svg viewBox="0 0 24 24"><path d="M7 2h10v3h3v14h-3v3H7v-3H4V5h3zm0 5v10h10V7zm2 2h6v6H9z"/></svg>
+        Processos
+      </button>
+      <button class="nav-item" data-page="tools">
+        <svg viewBox="0 0 24 24"><path d="M21 7l-4 4-3-1-1-3 4-4a6 6 0 00-8 7l-7 7a2 2 0 003 3l7-7a6 6 0 009-6z"/></svg>
+        Ferramentas
+      </button>
+      <button class="nav-item" data-page="settings">
+        <svg viewBox="0 0 24 24"><path fill-rule="evenodd" d="M10.3 2h3.4l.5 2.6 1.8.8 2.2-1.5 2.4 2.4-1.5 2.2.8 1.8 2.6.5v3.4l-2.6.5-.8 1.8 1.5 2.2-2.4 2.4-2.2-1.5-1.8.8-.5 2.6h-3.4l-.5-2.6-1.8-.8-2.2 1.5-2.4-2.4 1.5-2.2-.8-1.8L1.5 13.7v-3.4l2.6-.5.8-1.8-1.5-2.2 2.4-2.4 2.2 1.5 1.8-.8zM12 8.5a3.5 3.5 0 100 7 3.5 3.5 0 000-7z"/></svg>
+        Configurações
+      </button>
+    </nav>
+
+    <button class="bp-launch" id="open-bp">
+      <svg viewBox="0 0 24 24"><path fill-rule="evenodd" d="M7 6h10a5 5 0 015 5v3a4 4 0 01-7.2 2.4L13.5 15h-3l-1.3 1.4A4 4 0 012 14v-3a5 5 0 015-5zm1 3v2H6v2h2v2h2v-2h2v-2h-2V9zm8 0a1.2 1.2 0 100 2.4A1.2 1.2 0 0016 9zm-2 2.6a1.2 1.2 0 100 2.4 1.2 1.2 0 000-2.4z"/></svg>
+      <span>Big Picture<small>Modo console para jogos</small></span>
+    </button>
+    <div class="admin-box" id="admin-box"></div>
+  </aside>
+
+  <main>
+    <!-- Painel -->
+    <section class="page" id="page-dashboard">
+      <header class="page-header">
+        <div>
+          <h1>Painel</h1>
+          <p>Visão geral do desempenho do seu computador.</p>
+        </div>
+        <button class="btn primary" id="quick-optimize">Otimização rápida</button>
+      </header>
+
+      <div class="gauges">
+        <div class="card gauge-card">
+          <div class="gauge" id="gauge-cpu"><span>0%</span></div>
+          <div><h3>Processador</h3><p id="gauge-cpu-detail">—</p></div>
+        </div>
+        <div class="card gauge-card">
+          <div class="gauge" id="gauge-ram"><span>0%</span></div>
+          <div><h3>Memória RAM</h3><p id="gauge-ram-detail">—</p></div>
+        </div>
+        <div class="card gauge-card">
+          <div class="gauge" id="gauge-disk"><span>0%</span></div>
+          <div><h3>Disco do sistema</h3><p id="gauge-disk-detail">—</p></div>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <h2>Sistema</h2>
+          <dl class="info-list" id="system-info"><dt>Carregando…</dt></dl>
+        </div>
+        <div class="card">
+          <h2>Armazenamento</h2>
+          <div id="disk-list"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Limpeza -->
+    <section class="page" id="page-cleaner">
+      <header class="page-header">
+        <div>
+          <h1>Limpeza</h1>
+          <p>Remova arquivos temporários e caches que ocupam espaço sem necessidade.</p>
+        </div>
+        <div class="actions">
+          <button class="btn" id="scan-btn">Analisar</button>
+          <button class="btn primary" id="clean-btn" disabled>Limpar selecionados</button>
+        </div>
+      </header>
+
+      <div class="card summary">
+        <span>Espaço a liberar</span>
+        <strong id="clean-total">0 B</strong>
+      </div>
+      <div class="list" id="clean-list"></div>
+    </section>
+
+    <!-- Inicialização -->
+    <section class="page" id="page-startup">
+      <header class="page-header">
+        <div>
+          <h1>Inicialização</h1>
+          <p>Desative programas que abrem junto com o Windows para ligar mais rápido. <span id="startup-count"></span></p>
+        </div>
+        <button class="btn" id="startup-refresh">Atualizar</button>
+      </header>
+      <div class="list" id="startup-list"></div>
+    </section>
+
+    <!-- Processos -->
+    <section class="page" id="page-processes">
+      <header class="page-header">
+        <div>
+          <h1>Processos</h1>
+          <p>Programas em execução ordenados pelo uso de memória.</p>
+        </div>
+        <div class="actions">
+          <input class="input" id="process-filter" type="search" placeholder="Filtrar…">
+          <button class="btn" id="process-refresh">Atualizar</button>
+        </div>
+      </header>
+      <div class="list" id="process-list"></div>
+    </section>
+
+    <!-- Ferramentas -->
+    <section class="page" id="page-tools">
+      <header class="page-header">
+        <div>
+          <h1>Ferramentas</h1>
+          <p>Ajustes e manutenção do Windows.</p>
+        </div>
+      </header>
+
+      <div class="card power-card">
+        <div>
+          <h3>Plano de energia</h3>
+          <p>Planos de alto desempenho deixam o processador mais responsivo, com maior consumo de energia.</p>
+        </div>
+        <div class="actions">
+          <select class="input" id="power-select"></select>
+          <button class="btn" id="power-apply">Aplicar</button>
+        </div>
+      </div>
+
+      <div class="tools-grid">
+        <div class="card tool">
+          <h3>Desempenho Máximo</h3>
+          <p>Desbloqueia e ativa o plano de energia oculto "Desempenho Máximo" do Windows.</p>
+          <button class="btn" data-tool="ultimate">Ativar</button>
+        </div>
+        <div class="card tool">
+          <h3>Limpar cache DNS</h3>
+          <p>Resolve problemas de sites que não carregam ou endereços desatualizados.</p>
+          <button class="btn" data-tool="flush-dns">Executar</button>
+        </div>
+        <div class="card tool">
+          <h3>Ponto de restauração <span class="tag">Admin</span></h3>
+          <p>Cria um ponto de restauração do sistema antes de fazer alterações.</p>
+          <button class="btn" data-tool="restore-point">Criar</button>
+        </div>
+        <div class="card tool">
+          <h3>Otimizar unidade <span class="tag">Admin</span></h3>
+          <p>Executa TRIM em SSDs ou desfragmentação em HDs no disco do sistema.</p>
+          <button class="btn" data-tool="optimize-drive">Otimizar</button>
+        </div>
+        <div class="card tool">
+          <h3>Reiniciar Explorer</h3>
+          <p>Corrige barra de tarefas ou área de trabalho travadas.</p>
+          <button class="btn" data-tool="restart-explorer">Reiniciar</button>
+        </div>
+        <div class="card tool">
+          <h3>Verificar arquivos do sistema</h3>
+          <p>Abre o SFC em uma janela de administrador para reparar arquivos corrompidos.</p>
+          <button class="btn" data-tool="sfc">Iniciar</button>
+        </div>
+        <div class="card tool">
+          <h3>Limpeza de Disco</h3>
+          <p>Abre a ferramenta nativa do Windows para limpezas adicionais.</p>
+          <button class="btn" data-tool="disk-cleanup">Abrir</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Configurações -->
+    <section class="page" id="page-settings">
+      <header class="page-header">
+        <div>
+          <h1>Configurações</h1>
+          <p>Preferências do Kairoware XP.</p>
+        </div>
+      </header>
+
+      <div class="card setting">
+        <div>
+          <h3>Iniciar com o Windows</h3>
+          <p>Abre o Kairoware XP automaticamente quando você entra no Windows.</p>
+        </div>
+        <label class="switch"><input type="checkbox" id="set-startup"><span class="slider"></span></label>
+      </div>
+
+      <div class="card setting">
+        <div>
+          <h3>Abrir no modo Big Picture</h3>
+          <p>Ao iniciar com o Windows, entra direto na interface de console. Ideal para PCs ligados na TV.</p>
+        </div>
+        <label class="switch"><input type="checkbox" id="set-startup-bp"><span class="slider"></span></label>
+      </div>
+
+      <div class="card setting">
+        <div>
+          <h3>Atalhos na área de trabalho</h3>
+          <p>Crie atalhos que abrem direto o Big Picture ou o navegador feito para controle.</p>
+        </div>
+        <div class="actions">
+          <button class="btn" data-shortcut="big-picture">Big Picture</button>
+          <button class="btn" data-shortcut="browser">Navegador</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="toasts"></div>
+  <script src="renderer.js"></script>
+</body>
+</html>

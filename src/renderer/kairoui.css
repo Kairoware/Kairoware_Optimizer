@@ -1,0 +1,68 @@
+/*
+ * KairoUI — design language of Kairoware XP (glassmorphism).
+ * Translucent layers with backdrop blur, hairline light borders and a soft
+ * aurora background that shows through the glass.
+ */
+:root {
+  --kui-bg: #070910;
+  --kui-text: #eef0f7;
+  --kui-muted: rgba(238, 240, 247, .58);
+
+  --kui-accent: #7c5cff;
+  --kui-accent-2: #22d3ee;
+  --kui-accent-3: #f472b6;
+  --kui-gradient: linear-gradient(135deg, var(--kui-accent), #5b8cff 55%, var(--kui-accent-2));
+
+  --kui-glass: rgba(255, 255, 255, .055);
+  --kui-glass-strong: rgba(255, 255, 255, .1);
+  --kui-glass-hover: rgba(255, 255, 255, .085);
+  --kui-glass-border: rgba(255, 255, 255, .11);
+  --kui-glass-highlight: rgba(255, 255, 255, .22);
+  --kui-blur: 22px;
+  --kui-shadow: 0 12px 40px rgba(0, 0, 0, .35);
+
+  --kui-radius-sm: 10px;
+  --kui-radius: 16px;
+  --kui-radius-lg: 24px;
+}
+
+/* Frosted glass surface. */
+.kui-glass {
+  border: 1px solid var(--kui-glass-border);
+  background:
+    linear-gradient(160deg, rgba(255, 255, 255, .07), rgba(255, 255, 255, .02)) padding-box,
+    var(--kui-glass);
+  box-shadow: inset 0 1px 0 var(--kui-glass-highlight), var(--kui-shadow);
+  backdrop-filter: blur(var(--kui-blur)) saturate(1.4);
+}
+
+/* Aurora background: fixed colour blobs behind the glass. */
+.kui-aurora {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  background: var(--kui-bg);
+  pointer-events: none;
+}
+.kui-aurora::before,
+.kui-aurora::after,
+.kui-aurora span {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: .55;
+  animation: kui-drift 26s ease-in-out infinite alternate;
+}
+.kui-aurora::before { width: 46vw; height: 46vw; left: -8vw; top: -14vw; background: var(--kui-accent); }
+.kui-aurora::after { width: 40vw; height: 40vw; right: -10vw; bottom: -16vw; background: var(--kui-accent-2); opacity: .35; animation-delay: -9s; }
+.kui-aurora span { width: 28vw; height: 28vw; left: 45vw; top: 30vh; background: var(--kui-accent-3); opacity: .18; animation-delay: -17s; }
+
+@keyframes kui-drift {
+  to { transform: translate3d(6vw, 4vh, 0) scale(1.12); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kui-aurora::before, .kui-aurora::after, .kui-aurora span { animation: none; }
+}

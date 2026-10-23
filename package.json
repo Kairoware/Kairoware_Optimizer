@@ -1,0 +1,44 @@
+{
+  "name": "kairoware-xp",
+  "productName": "Kairoware XP",
+  "version": "0.1.0",
+  "description": "Otimizador de computador para Windows.",
+  "keywords": [
+    "optimizer"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "kairowareOpitimizer"
+  },
+  "author": "Kairo Martins (kairoware)",
+  "type": "commonjs",
+  "main": "main.js",
+  "scripts": {
+    "start": "set ELECTRON_RUN_AS_NODE=&& electron .",
+    "bigpicture": "set ELECTRON_RUN_AS_NODE=&& electron . --big-picture",
+    "icons": "set ELECTRON_RUN_AS_NODE=&& electron scripts/generate-icons.js",
+    "dist": "electron-builder --win"
+  },
+  "build": {
+    "appId": "com.kairoware.xp",
+    "productName": "Kairoware XP",
+    "files": [
+      "main.js",
+      "preload.js",
+      "src/**/*",
+      "assets/**/*"
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "assets/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
+  },
+  "devDependencies": {
+    "electron": "^45.0.0",
+    "electron-builder": "^26.15.3"
+  }
+}

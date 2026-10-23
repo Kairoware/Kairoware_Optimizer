@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="kw-bg" gradientUnits="userSpaceOnUse" x1="16" y1="16" x2="496" y2="496">
+      <stop offset="0" stop-color="#8b5cff"/>
+      <stop offset=".55" stop-color="#5b7cff"/>
+      <stop offset="1" stop-color="#22d3ee"/>
+    </linearGradient>
+    <linearGradient id="kw-glass" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff" stop-opacity=".5"/>
+      <stop offset=".6" stop-color="#fff" stop-opacity=".08"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="kw-pad" gradientUnits="userSpaceOnUse" x1="0" y1="150" x2="0" y2="420">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset="1" stop-color="#dfe5ff"/>
+    </linearGradient>
+    <radialGradient id="kw-light" cx=".5" cy=".5" r=".5">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset=".45" stop-color="#67e8f9"/>
+      <stop offset="1" stop-color="#22d3ee" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="kw-shape">
+      <rect x="16" y="16" width="480" height="480" rx="120"/>
+    </clipPath>
+    <filter id="kw-shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="14" stdDeviation="16" flood-color="#1b0d63" flood-opacity=".5"/>
+    </filter>
+  </defs>
+
+  <!-- Glass tile -->
+  <g clip-path="url(#kw-shape)">
+    <rect x="16" y="16" width="480" height="480" fill="url(#kw-bg)"/>
+    <circle cx="440" cy="80" r="170" fill="#f472b6" opacity=".35"/>
+    <circle cx="60" cy="480" r="170" fill="#22d3ee" opacity=".3"/>
+    <path d="M16 16H496V200C380 254 160 150 16 248Z" fill="url(#kw-glass)"/>
+  </g>
+  <rect x="18" y="18" width="476" height="476" rx="118" fill="none" stroke="#fff" stroke-opacity=".4" stroke-width="4"/>
+
+  <!-- Gamepad: the D-pad is a K monogram, with Xbox-style coloured face buttons -->
+  <g transform="translate(256 286) scale(.86) translate(-256 -290)">
+    <path filter="url(#kw-shadow)" fill="url(#kw-pad)"
+      d="M150 168H362C422 168 452 204 463 264L479 352C487 400 451 428 418 411C396 400 384 377 366 356H146C128 377 116 400 94 411C61 428 25 400 33 352L49 264C60 204 90 168 150 168Z"/>
+
+    <!-- K -->
+    <g fill="none" stroke="url(#kw-bg)" stroke-width="22" stroke-linecap="round">
+      <path d="M128 230V298"/>
+      <path d="M140 266L176 230"/>
+      <path d="M148 260L180 298"/>
+    </g>
+
+    <!-- Face buttons -->
+    <circle cx="364" cy="230" r="14" fill="#fbbf24"/>
+    <circle cx="394" cy="262" r="14" fill="#f87171"/>
+    <circle cx="364" cy="294" r="14" fill="#4ade80"/>
+    <circle cx="334" cy="262" r="14" fill="#60a5fa"/>
+
+    <!-- View / Menu buttons and the glowing home light -->
+    <rect x="216" y="246" width="26" height="11" rx="5.5" fill="#a5b4fc"/>
+    <rect x="270" y="246" width="26" height="11" rx="5.5" fill="#a5b4fc"/>
+    <circle cx="256" cy="206" r="22" fill="url(#kw-light)"/>
+    <circle cx="256" cy="206" r="8" fill="#fff"/>
+
+    <!-- Thumbsticks -->
+    <circle cx="206" cy="318" r="27" fill="#c7d2fe"/>
+    <circle cx="206" cy="318" r="17" fill="url(#kw-bg)" opacity=".85"/>
+    <circle cx="306" cy="318" r="27" fill="#c7d2fe"/>
+    <circle cx="306" cy="318" r="17" fill="url(#kw-bg)" opacity=".85"/>
+  </g>
+</svg>
